@@ -31,12 +31,12 @@ namespace LuckyNumbers
                     userNumbers[i] = int.Parse(Console.ReadLine());
                     while (userNumbers[i] < lowestNumber)
                     {
-                        Console.WriteLine("Please enter a new number between " + lowestNumber + " and " + highestNumber + ".");
+                        Console.WriteLine("Outside of range! Please enter a new number between " + lowestNumber + " and " + highestNumber + ".");
                         userNumbers[i] = int.Parse(Console.ReadLine());
                     }
                     while (userNumbers[i] > highestNumber)
                     {
-                        Console.WriteLine("Please enter a new number between " + lowestNumber + " and " + highestNumber + ".");
+                        Console.WriteLine("Outside of range! Please enter a new number between " + lowestNumber + " and " + highestNumber + ".");
                         userNumbers[i] = int.Parse(Console.ReadLine());
                     }
 
@@ -69,6 +69,7 @@ namespace LuckyNumbers
 
                 double userWinnings = ((correctAnswers / 6) * jackpotAmount);
 
+                
                 Console.WriteLine("You won $" + userWinnings.ToString("#.##") + "!");
                 Console.WriteLine("Would you like to play again? (YES/NO)");
                 playAgain = Console.ReadLine().ToUpper();
