@@ -65,8 +65,9 @@ namespace LuckyNumbers
                 }
                 Console.WriteLine("You guessed " + correctAnswers + " numbers correctly!");
 
-                double userPercent = (correctAnswers / 6);
-                double userWinnings = (userPercent * jackpotAmount);
+                //End results
+
+                double userWinnings = ((correctAnswers / 6) * jackpotAmount);
 
                 Console.WriteLine("You won $" + userWinnings.ToString("#.##") + "!");
                 Console.WriteLine("Would you like to play again? (YES/NO)");
