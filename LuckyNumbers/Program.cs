@@ -12,65 +12,68 @@ namespace LuckyNumbers
         {
             //User inputs
 
-            Console.WriteLine("Welcome to the Lucky Number game!");
-            Console.WriteLine("Please enter a low number to create a minimum range value:");
-            int lowestNumber = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please enter a high number to create a maximum range value:");
-            int highestNumber = int.Parse(Console.ReadLine());
-
-            //User input array
-
-            int[] userNumbers = new int[6];
-            for (int i = 0; i <= 5; i++)
+            string playAgain;
+            do
             {
-                Console.WriteLine("Please enter 6 unique numbers between " + lowestNumber + " and " + highestNumber + ", each followed by pressing ENTER");
-                userNumbers[i] = int.Parse(Console.ReadLine());
-                while (userNumbers[i] < lowestNumber)
+                int jackpotAmount = 10000000;
+                Console.WriteLine("Welcome to the Lucky Number game! Where you have a chance to win $" + jackpotAmount + "!");
+                Console.WriteLine("Please enter a low number to create a minimum range value:");
+                int lowestNumber = int.Parse(Console.ReadLine());
+                Console.WriteLine("Please enter a high number to create a maximum range value:");
+                int highestNumber = int.Parse(Console.ReadLine());
+
+                //User input array
+
+                int[] userNumbers = new int[6];
+                for (int i = 0; i <= 5; i++)
                 {
-                    Console.WriteLine("Please enter a new number between " + lowestNumber + " and " + highestNumber + ".");
+                    Console.WriteLine("Please enter 6 unique numbers between " + lowestNumber + " and " + highestNumber + ", each followed by pressing ENTER");
                     userNumbers[i] = int.Parse(Console.ReadLine());
+                    while (userNumbers[i] < lowestNumber)
+                    {
+                        Console.WriteLine("Please enter a new number between " + lowestNumber + " and " + highestNumber + ".");
+                        userNumbers[i] = int.Parse(Console.ReadLine());
+                    }
+                    while (userNumbers[i] > highestNumber)
+                    {
+                        Console.WriteLine("Please enter a new number between " + lowestNumber + " and " + highestNumber + ".");
+                        userNumbers[i] = int.Parse(Console.ReadLine());
+                    }
+
                 }
-                while (userNumbers[i] > highestNumber)
+
+                //Random number generator into array
+
+                Random randNum = new Random();
+                int[] jackpotNumbers = new int[6];
+                for (int j = 0; j <= 5; j++)
                 {
-                    Console.WriteLine("Please enter a new number between " + lowestNumber + " and " + highestNumber + ".");
-                    userNumbers[i] = int.Parse(Console.ReadLine());
+                    jackpotNumbers[j] = randNum.Next(lowestNumber, highestNumber);
+                    Console.WriteLine("Lucky Number: " + jackpotNumbers[j]);
+
                 }
-            }
-            Array.Sort(userNumbers);
 
-            //Random array generator
+                //Array matching
 
-            Random randNum = new Random();
-            int[] jackpotNumbers = new int[6];
-            for (int j = 0; j <=5 ; j++)
-            {
-                jackpotNumbers[j] = randNum.Next(lowestNumber, highestNumber);
-                Console.WriteLine("Lucky Number: " + jackpotNumbers[j]);
-                
-            }
-            Array.Sort(jackpotNumbers);
-
-            //Array matching
-
-            int correctAnswers = 0;
-            foreach (int i in userNumbers)
-            {
-                if (jackpotNumbers.Contains(i))
+                double correctAnswers = 0;
+                foreach (int i in userNumbers)
                 {
-                    correctAnswers += 1;
+                    if (jackpotNumbers.Contains(i))
+                    {
+                        correctAnswers += 1;
+                    }
                 }
+                Console.WriteLine("You guessed " + correctAnswers + " numbers correctly!");
+
+                double userPercent = (correctAnswers / 6);
+                double userWinnings = (userPercent * jackpotAmount);
+
+                Console.WriteLine("You won $" + userWinnings.ToString("#.##") + "!");
+                Console.WriteLine("Would you like to play again? (YES/NO)");
+                playAgain = Console.ReadLine().ToUpper();
             }
-
-
-            Console.WriteLine("You guessed " + correctAnswers + " numbers correctly!");
-
-
-
-
-
-
-
-
+            while (playAgain == "YES");
+            Console.WriteLine("Thanks for playing!");
         }
     }
 }
